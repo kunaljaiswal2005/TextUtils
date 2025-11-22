@@ -1,0 +1,24 @@
+/* Base App Styling */
+body {
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Button improvements */
+button {
+  transition: 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* Prevent UI jump when alert disappears */
+.alert {
+  font-size: 15px;
+}
+
+/* Smooth dark mode transition for textarea & containers */
+textarea,
+.container {
+  transition: all 0.25s ease-in-out;
+}
