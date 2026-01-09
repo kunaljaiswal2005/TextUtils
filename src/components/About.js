@@ -1,57 +1,64 @@
 import React from "react";
 
-export default function About(props) {
+export default function About({ mode }) {
 
-  const myStyle = {
-    color: props.mode === "dark" ? "white" : "#042743",
-    backgroundColor: props.mode === "dark" ? "#042743" : "white",
-    border: props.mode === "dark" ? "1px solid white" : "1px solid #042743",
+  const themeStyle = {
+    color: mode === "dark" ? "#ffffff" : "#042743",
+    backgroundColor: mode === "dark" ? "#042743" : "#ffffff",
+    border: mode === "dark" ? "1px solid #ffffff" : "1px solid #042743",
   };
 
+  const accordionData = [
+    {
+      id: "One",
+      title: "Our Mission",
+      content: "We aim to provide users with powerful text tools that are fast, simple, and effective."
+    },
+    {
+      id: "Two",
+      title: "Why Choose Us",
+      content: "Our platform focuses on clean UI, performance, and user-friendly features."
+    },
+    {
+      id: "Three",
+      title: "Future Goals",
+      content: "We plan to expand with AI-powered tools and smarter text analysis."
+    }
+  ];
+
   return (
-    <div className="container" style={myStyle}>
-      <h1 className="my-3">About Us</h1>
+    <div className="container my-4" style={themeStyle}>
+      <h1 className="mb-4">About Us</h1>
 
       <div className="accordion" id="accordionExample">
 
-        <div className="accordion-item" style={myStyle}>
-          <h2 className="accordion-header">
-            <button className="accordion-button" style={myStyle} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-              Accordion Item #1
-            </button>
-          </h2>
-          <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-            <div className="accordion-body">
-              <strong>This is the first item’s accordion body.</strong>
-            </div>
-          </div>
-        </div>
+        {accordionData.map((item, index) => (
+          <div key={item.id} className="accordion-item" style={themeStyle}>
 
-        <div className="accordion-item" style={myStyle}>
-          <h2 className="accordion-header">
-            <button className="accordion-button collapsed" style={myStyle} type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-              Accordion Item #2
-            </button>
-          </h2>
-          <div id="collapseTwo" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
-            <div className="accordion-body">
-              <strong>This is the second item’s accordion body.</strong>
-            </div>
-          </div>
-        </div>
+            <h2 className="accordion-header">
+              <button
+                className={`accordion-button ${index !== 0 ? "collapsed" : ""}`}
+                style={themeStyle}
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target={`#collapse${item.id}`}
+              >
+                {item.title}
+              </button>
+            </h2>
 
-        <div className="accordion-item" style={myStyle}>
-          <h2 className="accordion-header">
-            <button className="accordion-button collapsed" style={myStyle} type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
-              Accordion Item #3
-            </button>
-          </h2>
-          <div id="collapseThree" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
-            <div className="accordion-body">
-              <strong>This is the third item’s accordion body.</strong>
+            <div
+              id={`collapse${item.id}`}
+              className={`accordion-collapse collapse ${index === 0 ? "show" : ""}`}
+              data-bs-parent="#accordionExample"
+            >
+              <div className="accordion-body">
+                {item.content}
+              </div>
             </div>
+
           </div>
-        </div>
+        ))}
 
       </div>
     </div>
